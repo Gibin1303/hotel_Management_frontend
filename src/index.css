@@ -1,0 +1,312 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Hanken+Grotesk:wght@400;500;600&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------- Design tokens (replaces tailwind.config.js in v4) ---------- */
+@theme {
+  /* Deep midnight teal: nav, footer, headings */
+  --color-ink-50: #eef3f3;
+  --color-ink-100: #d5e1e2;
+  --color-ink-200: #a9c2c5;
+  --color-ink-300: #7da3a8;
+  --color-ink-400: #4f7a81;
+  --color-ink-500: #2f565d;
+  --color-ink-600: #1f4047;
+  --color-ink-700: #16323a;
+  --color-ink-800: #0f2a2e;
+  --color-ink-900: #091c1f;
+  --color-ink-950: #051214;
+
+  /* Champagne brass: CTAs, ratings, price accents */
+  --color-brass-50: #fbf7ee;
+  --color-brass-100: #f4ebd5;
+  --color-brass-200: #e8d6a9;
+  --color-brass-300: #dbc17e;
+  --color-brass-400: #ceab5e;
+  --color-brass-500: #c8a86b;
+  --color-brass-600: #a98a4e;
+  --color-brass-700: #856a3b;
+  --color-brass-800: #5f4b2a;
+  --color-brass-900: #3d301b;
+
+  /* Cool pearl neutrals: page and card surfaces */
+  --color-pearl-50: #fcfcfb;
+  --color-pearl-100: #f6f6f3;
+  --color-pearl-200: #ecede8;
+  --color-pearl-300: #dcded7;
+  --color-pearl-400: #b9bcb2;
+  --color-pearl-500: #8f938a;
+  --color-pearl-600: #6b6f67;
+  --color-pearl-700: #4c4f49;
+  --color-pearl-800: #33352f;
+  --color-pearl-900: #1e1f1c;
+
+  /* Deep wine: offers, limited availability */
+  --color-merlot-100: #f3dde1;
+  --color-merlot-500: #8c2f44;
+  --color-merlot-700: #5e1d2d;
+
+  /* Status */
+  --color-success: #2e7d63;
+  --color-warning: #b7791f;
+  --color-danger: #b3372f;
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft: 0 1px 2px rgb(9 28 31 / 0.06), 0 8px 24px -8px rgb(9 28 31 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(9 28 31 / 0.08), 0 20px 40px -12px rgb(9 28 31 / 0.25);
+  --shadow-brass: 0 8px 24px -8px rgb(200 168 107 / 0.55);
+
+  --radius-card: 14px;
+  --radius-control: 10px;
+  --tracking-display: -0.01em;
+}
+
+/* ---------- Your base variables (now mapped to the palette) ---------- */
+:root {
+  --background: oklch(1 0 0); /* pearl-100 */
+  --foreground: oklch(0.145 0 0); /* pearl-800 */
+  --primary: oklch(0.205 0 0);    /* ink-800 */
+  --radius: 0.625rem;
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    @apply bg-background text-foreground;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--primary);
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brass-500;
+  }
+  html {
+    scroll-behavior: smooth;
+    @apply font-sans;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  * {
+    @apply border-border outline-ring/50;
+  }
+}
+
+/* ---------- Gradients ---------- */
+@utility bg-brass-sheen {
+  background-image: linear-gradient(135deg, #dbc17e 0%, #c8a86b 45%, #a98a4e 100%);
+}
+@utility bg-ink-veil {
+  background-image: linear-gradient(180deg, rgb(5 18 20 / 0) 0%, rgb(5 18 20 / 0.85) 100%);
+}
+
+/* ---------- Buttons ---------- */
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-control px-6 py-3 text-sm font-semibold transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-brass-sheen text-ink-900 shadow-brass hover:brightness-105;
+}
+@utility btn-dark {
+  @apply btn bg-ink-800 text-pearl-50 hover:bg-ink-700;
+}
+@utility btn-outline {
+  @apply btn border border-ink-800 text-ink-800 hover:bg-ink-800 hover:text-pearl-50;
+}
+@utility btn-outline-light {
+  @apply btn border border-pearl-50/60 text-pearl-50 hover:bg-pearl-50 hover:text-ink-800;
+}
+@utility btn-ghost {
+  @apply btn text-ink-700 hover:bg-pearl-200;
+}
+
+/* ---------- Surfaces ---------- */
+@utility section-dark {
+  @apply bg-ink-800 text-pearl-200;
+  & h1, & h2, & h3 {
+    @apply text-pearl-50;
+  }
+}
+@utility card {
+  @apply overflow-hidden rounded-card border border-pearl-300 bg-pearl-50 shadow-soft;
+}
+@utility card-hover {
+  @apply card transition-shadow duration-200 hover:shadow-lift;
+}
+@utility card-dark {
+  @apply rounded-card border border-ink-600 bg-ink-700 text-pearl-200 shadow-lift;
+}
+
+/* ---------- Booking bar & forms ---------- */
+@utility booking-bar {
+  @apply grid gap-3 rounded-card border border-brass-300/40 bg-pearl-50 p-4 shadow-lift md:grid-cols-[repeat(4,1fr)_auto] md:items-end;
+}
+@utility field-label {
+  @apply mb-1 block text-xs font-medium text-pearl-600;
+}
+@utility input {
+  @apply w-full rounded-control border border-pearl-300 bg-pearl-50 px-4 py-3 text-sm text-ink-800 placeholder:text-pearl-500 focus:border-brass-500 focus:outline-none focus:ring-2 focus:ring-brass-200;
+}
+@utility input-error {
+  @apply input border-danger focus:border-danger focus:ring-danger/20;
+}
+
+/* ---------- Room & pricing ---------- */
+@utility price {
+  @apply font-display text-3xl font-semibold text-ink-800;
+}
+@utility price-note {
+  @apply text-xs text-pearl-600;
+}
+@utility price-old {
+  @apply text-sm text-pearl-500 line-through;
+}
+@utility amenity-chip {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-pearl-300 bg-pearl-100 px-3 py-1 text-xs text-pearl-700;
+}
+@utility rating-badge {
+  @apply inline-flex items-center gap-1 rounded-md bg-ink-800 px-2 py-1 text-xs font-semibold text-brass-300;
+}
+@utility image-scrim {
+  @apply absolute inset-0 bg-ink-veil;
+}
+
+/* ---------- Status badges ---------- */
+@utility badge {
+  @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium;
+}
+@utility badge-available { @apply badge bg-success/10 text-success; }
+@utility badge-few-left  { @apply badge bg-warning/10 text-warning; }
+@utility badge-sold-out  { @apply badge bg-danger/10 text-danger; }
+@utility badge-offer     { @apply badge bg-merlot-100 text-merlot-700; }
+@utility badge-member    { @apply badge bg-brass-100 text-brass-800; }
+
+/* ---------- Navigation, steps, decoration ---------- */
+@utility nav-link {
+  @apply text-sm font-medium text-pearl-200 transition-colors hover:text-brass-300;
+}
+@utility nav-link-active {
+  @apply text-brass-300;
+}
+@utility divider-brass {
+  @apply h-px w-16 bg-brass-500;
+}
+@utility step-active   { @apply bg-brass-500 text-ink-900; }
+@utility step-complete { @apply bg-ink-800 text-brass-300; }
+@utility step-idle     { @apply bg-pearl-200 text-pearl-600; }
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: 'Geist Variable', sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
