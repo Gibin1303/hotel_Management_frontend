@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MapPin, Star, Calendar, Loader2Icon } from "lucide-react";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { addImage } from "@/fetures/HotelsDetail/hotelslice";

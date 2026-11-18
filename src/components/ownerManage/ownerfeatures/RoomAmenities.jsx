@@ -1,7 +1,7 @@
 import { useFieldArray } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/Input";
 
 const RoomAmenities = ({ control }) => {
   const { fields, append, remove } = useFieldArray({

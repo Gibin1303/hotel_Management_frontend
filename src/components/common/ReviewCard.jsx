@@ -1,6 +1,6 @@
 import { Star, BadgeCheck } from "lucide-react";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/Card";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
