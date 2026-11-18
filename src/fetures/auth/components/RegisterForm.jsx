@@ -23,7 +23,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/Card.jsx";
+} from "@/components/ui/card";
 
 import { registerSchema } from "../schema/registerSchema";
 import { registerApi } from "../services/authApi";

@@ -1,5 +1,5 @@
 import { hotels } from "@/lib/constants";
-import HotelCard from "../common/Hotelcard";
+import HotelCard from "../common/HotelCard";
 
 export default function FeaturedHotels() {
   return (

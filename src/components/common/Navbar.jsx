@@ -11,7 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/Dropdown menu.jsx";
+} from "@/components/ui/Dropdown menu";
 import {
   Sheet,
   SheetContent,
