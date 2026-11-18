@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { CalendarCheck, LogOut, Menu, User } from "lucide-react";
 
-import { Button } from "@/components/ui/Button";
-import { Avatar, AvatarFallback } from "@/components/ui/Avatar.jsx";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
