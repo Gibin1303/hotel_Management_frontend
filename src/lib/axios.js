@@ -17,12 +17,16 @@
 import axios from "axios";
 import { useEffect } from "react";
 
-
+const baseURL =
+  import.meta.env.MODE === "production"
+    ? "https://hotel-management-server-xykz.onrender.com/api/v1"
+    : "http://localhost:5000/api/v1";
 
 const api = axios.create({
-  baseURL: "https://hotel-management-server-xykz.onrender.com/api/v1",
+  baseURL,
+  // baseURL: "http://localhost:5000/api/v1",
+
   withCredentials: true,
-  // http://localhost:5000/
   // headers: {
   //   "Content-Type": "application/json",
   // },
@@ -49,7 +53,7 @@ api.interceptors.response.use(
   async (error) => {
     const original = error.config;
     const isAuthRoute = original?.url?.includes("/auth/");
-     console.log("Status:", error.response?.status);
+    console.log("Status:", error.response?.status);
     console.log("Data:", error.response?.data);
 
     if (error.response?.status === 401 && !original._retry && !isAuthRoute) {

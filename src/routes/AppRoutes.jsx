@@ -32,7 +32,7 @@ const Register = lazy(() => import("@/fetures/auth/pages/Register"));
 
 function AppRoutes() {
   const dispatch = useDispatch();
-  const { user } = useAuth();
+  const { user, checked } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,8 +41,11 @@ function AppRoutes() {
         const { data } = await api.post("/auth/refresh-token");
 
         dispatch(tokenRefreshed(data.data.token));
-      } catch {
-        dispatch(logout());
+      } catch(error) {
+        console.error("Refresh token failed:", error);
+        // if (error.response?.status === 500) {
+          // dispatch(logout());
+        // }
       } finally {
         dispatch(authChecked());
       }
@@ -59,6 +62,21 @@ function AppRoutes() {
       console.error("Logout failed:", error);
     }
   };
+
+  if (!checked) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <p>Restoring session...</p>
+      </div>
+    );
+  }
 
   return (
     <>
